@@ -1,44 +1,68 @@
-<p>
-    <i>( Describe task in general )</i>
+<p class="story">
+    !TODO!
 </p>
 
 <p>
-    Sum two passed ints
+    In the northern waters sailors see Ghost Ship more frequently recent times.
+    Nobody see ships since they met Ghost Ship.
+    But how to distinguish a normal and ghost ship in dense fog?
+    We can use locator for this.
 </p>
-
-<p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{MEDIA}}example.png" alt="example" width="392px"/>
-    <img class="for_editor_only" title="example" src="{{MEDIA}}example.png" alt="example" width="380px"/>
-</p>
-
-<p><i>( Explain input and output values )</i></p>
 <p>
-    <strong>Input: </strong> Two arguments. Both are int
+    For a normal ship reflected signals have the same durations.
+    So we wait three signals and if they have the same durations, then we are quite.
+    But if you see any difference - it's better to run away.
+</p>
+<p>
+    We have the old discrete locator so test results are looking as sequence of 1 and 0,
+    where each symbol is a value for seconds. 1 is a signal, 0 is pause.
+    So N consecutive 1 is a N seconds signal. Pauses can have various lengths.
+    But our old locator show tests results as a number in decimal form, so you need convert it in binary form before
+    analysis.
+    The binary form of tests have the next pattern r"1+0+1+0+1+" (regexp).
 </p>
 
 <p>
-    <strong>Output: </strong> Int. 
+    Let's look at examples:<br>
+    - The number on locator is 21. It's "10101" in the binary form and we see 3 signals with 1 second duration each.
+    This is a normal ship.<br>
+    - The number is 1587. The binary form - "11000110011 and we see 3 signals with 2 seconds duration but with various
+    pause.
+    It's ok.<br>
+    - The number is 3687. The binary form - "111001100111 and we see 3 signals. Two signals with 3 seconds duration
+    and one with 2 seconds. It's better to run away.
 </p>
 
+<p>
+    You are given a number and your mission is recognize is it a normal ship (True) or not.
+</p>
+
+<p>
+    <strong>Input: </strong> A number as an integer.
+</p>
+
+<p>
+    <strong>Output: </strong> Is it a normal ship or not as a boolean.
+</p>
 
 
 <div class="for_info_only">
-    <p><i>( Put some usage examples )</i></p>
     <p>
         <strong>Example:</strong>
     </p>
     <pre class="brush: python">
-checkio(3, 2) == 5
-checkio(5, 7) == 12
+recognize(21) == True
+recognize(1587) == True
+recognize(3687) == False
     </pre>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    <i>(Here you can explain how it can be used in development and what is usage of this.)</i>
+    This is an example of the simple pattern recognition in texts and discrete signals.
 </p>
 
 <p>
-    <strong>Precondition:</strong>
-    <i>Constraints for Input</i>
+    <strong>Precondition:</strong><br>
+    21 &le; number &le; 1057222719<br>
 </p>
