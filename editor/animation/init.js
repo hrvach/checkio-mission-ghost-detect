@@ -40,7 +40,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
             }
 
             //YOUR FUNCTION NAME
-            var fname = 'checkio';
+            var fname = 'recognize';
 
             var checkioInput = data.in;
             var checkioInputStr = fname + '(' + JSON.stringify(checkioInput) + ')';
@@ -76,8 +76,11 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
                 var result = data.ext["result"];
                 var result_addon = data.ext["result_addon"];
 
+                var svg = new SignalSvg($content.find(".explanation")[0]);
                 //if you need additional info from tests (if exists)
                 var explanation = data.ext["explanation"];
+
+                svg.draw(explanation);
                 $content.find('.output').html('&nbsp;Your result:&nbsp;' + JSON.stringify(userResult));
                 if (!result) {
                     $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(rightResult));
@@ -120,27 +123,52 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
 //                this_e.sendToConsoleCheckiO("something");
 //            });
 //        });
+        function SignalSvg(dom) {
 
-        var colorOrange4 = "#F0801A";
-        var colorOrange3 = "#FA8F00";
-        var colorOrange2 = "#FAA600";
-        var colorOrange1 = "#FABA00";
 
-        var colorBlue4 = "#294270";
-        var colorBlue3 = "#006CA9";
-        var colorBlue2 = "#65A1CF";
-        var colorBlue1 = "#8FC7ED";
+            var colorOrange4 = "#F0801A";
+            var colorOrange3 = "#FA8F00";
+            var colorOrange2 = "#FAA600";
+            var colorOrange1 = "#FABA00";
 
-        var colorGrey4 = "#737370";
-        var colorGrey3 = "#9D9E9E";
-        var colorGrey2 = "#C5C6C6";
-        var colorGrey1 = "#EBEDED";
+            var colorBlue4 = "#294270";
+            var colorBlue3 = "#006CA9";
+            var colorBlue2 = "#65A1CF";
+            var colorBlue1 = "#8FC7ED";
 
-        var colorWhite = "#FFFFFF";
-        //Your Additional functions or objects inside scope
-        //
-        //
-        //
+            var colorGrey4 = "#737370";
+            var colorGrey3 = "#9D9E9E";
+            var colorGrey2 = "#C5C6C6";
+            var colorGrey1 = "#EBEDED";
+
+            var colorWhite = "#FFFFFF";
+
+            var p = 2;
+            var py = 10;
+            var sizeX = 360;
+            var sizeY = 100 + 2 * py;
+            var paper;
+
+            this.draw = function (data) {
+                var cell = (sizeX / data.length) - p;
+                paper = Raphael(dom, sizeX, sizeY);
+
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i] === "1") {
+                        paper.rect(
+                            p / 2 + i * (cell + p), py, cell, 100
+                        ).attr({"stroke": colorBlue4, "stroke-width": 0, "fill": colorBlue4});
+                    }
+                }
+
+                paper.path([
+                    ["M", p / 2, sizeY - py],
+                    ["H", sizeX - p / 2]
+                ]).attr({"stroke": colorBlue4, "stroke-width": 4});
+
+            }
+
+        }
 
 
     }
