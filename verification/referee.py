@@ -28,7 +28,7 @@ checkio.referee.cover_codes
 
 from checkio.signals import ON_CONNECT
 from checkio import api
-from checkio.referees.io import CheckiOReferee
+from golf import CheckioRefereeGolf
 from checkio.referees import cover_codes
 from checkio.referees import checkers
 
@@ -36,9 +36,10 @@ from tests import TESTS
 
 api.add_listener(
     ON_CONNECT,
-    CheckiOReferee(
+    CheckioRefereeGolf(
         tests=TESTS,
-        function_name="recognize",
+        function_name="golf",
+        max_length=250
         # checker=None,  # checkers.float.comparison(2)
         # add_allowed_modules=[],
         # add_close_builtins=[],
