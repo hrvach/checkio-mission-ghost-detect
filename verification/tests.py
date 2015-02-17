@@ -24,6 +24,11 @@ TESTS = {
             "explanation": "111111000000111111000000111111"
         },
         {
+            "input": 43,
+            "answer": False,
+            "explanation": "101011"
+        },
+        {
             "input": 1057222687,
             "answer": False,
             "explanation": "111111000000111111000000011111"

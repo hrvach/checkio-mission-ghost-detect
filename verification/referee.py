@@ -39,7 +39,7 @@ api.add_listener(
     CheckioRefereeGolf(
         tests=TESTS,
         function_name="recognize",
-        max_length=250
+        max_length=200
         # checker=None,  # checkers.float.comparison(2)
         # add_allowed_modules=[],
         # add_close_builtins=[],
