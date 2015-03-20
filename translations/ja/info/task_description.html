@@ -1,0 +1,115 @@
+<p class="story">
+    <img alt="Albert Pinkham Ryder. Flying Dutchman" title="Albert Pinkham Ryder. Flying Dutchman"
+         src="{{MEDIA}}art.jpg" width="300px" style="float: left; padding: 0 10px 0 0">
+    "Who hath seen the Phantom Ship,
+    Her lordly rise and lowly dip,
+    Careering o'er the lonesome main,
+    No port shall know her keel again...
+    Ah, woe is in the awful sight,
+    The sailor finds there eternal night,
+    'Neath the waters he shall ever sleep,
+    And Ocean will the secret keep”<br><br>
+    --Albert Pinkham Ryder, 1897
+</p>
+<p style="clear: both"></p>
+
+
+<p>
+    北の海で船乗りがパトロール中に幽霊船を見たと言う。彼らが幽霊船を目撃した後、誰も他の船を見た者はいない。
+    ここである問題がある。どうやって彼らはそのような濃い霧の中で通常の船と幽霊船を見分けるのだろうか？
+    私たちはこのために識別プログラムを使うことができる。
+    <!-- In the northern waters, sailors say they’ve seen Ghost Ship patrolling the waters. Nobody can see the other ships
+    after they witness the Ghost Ship. This causes a problem: how do they distinguish a normal ship from the ghost ship
+    in such dense fog? We can use a locator program for this. -->
+</p>
+<p>
+   通常の船は反射信号は同じ長さである。従って3回の信号を待ち同じ間隔であれば、その船は通常なので私たちは安全である。
+   もし違っていれば、それは幽霊船なので逃げた方が良い。
+    <!-- For a normal ship, reflected signals have the same duration. So you wait for three signals and if they have the same
+    durations, then we are safe because the ship is normal. If you see any difference - we’d better to run away, because
+    that’s the Ghost Ship. -->
+
+</p>
+<p>
+   私たちは古い離散識別子をもっており、テストの結果は1と0の列に見え、それぞれの記号は1秒ごとの値を示している。
+   1は信号で0はポーズである。なのでN個の連続した1はN秒の信号である。ポーズは同様に様々な長さを取りえる。
+   この古い離散識別子はテスト結果を10進数の数字として表す、従って分析する前に2進数に変換する必要がある。
+   2進数の形式は以下のパターンである。 r"1+0+1+0+1+" (正規表現)
+    <!-- We have the old discrete locator, so test results look like a sequence of 1’s and 0’s, where each symbol is a value
+    in seconds. 1 is a signal, 0 is pause. So “N” consecutive 1’s is a “N” seconds long signal. Pauses can be various
+    lengths as well. The old locator shows test results as a number in decimal form, so you will need to convert it to
+    binary form before analysis can begin. The binary form of our tests have the pattern r"1+0+1+0+1+" (regexp). -->
+
+</p>
+
+<p>
+   いくつかの例を見よう<br>
+   - 識別子の番号が21である。2進数で表すと "10101" となり、3つの信号がありそれぞれ1秒の長さであるとわかる。
+     これは通常の船である。<br>
+   - 識別子の番号が1587である。2進数で表すと "11000110011" となり、3つの信号が2秒の長さであるが様々なポーズがある。
+      これは大丈夫である。<br>
+   - 識別子の番号が3687である。2進数では "111001100111" となり3つの信号がある。2つの信号は3秒の長さで1つは2秒である。
+      逃げるのが名案である。<br>
+     <!-- Let's look at some examples:<br>
+    - The number on the locator is 21. It's "10101" in binary form and we see 3 signals with 1 second duration each.
+    This is a normal ship.<br>
+    - The number is 1587. The binary form is "11000110011” and we see 3 signals with 2 seconds duration but with various
+    pauses. It's ok.<br>
+    - The number is 3687. The binary form - "111001100111” and we see 3 signals. Two signals with 3 seconds duration and
+    one with 2 seconds. It's a good idea to run away. -->
+
+</p>
+
+<p>
+   あなたには番号が与えられ、その番号が通常の船(True)かそうでないか(False)であるかを認識することがあなたのミッションである。
+    <!-- You are given a number and your mission is recognize if this number reveals a normal ship (True) or not (False). -->
+</p>
+
+<p>
+   このチャレンジではもう一つのルールがある。これはコードゴルフミッションであり、主なゴールはあなたのコードをできるだけ短くすることである。
+   コードが短ければより多くのポイントを獲得できる。このミッションのスコアはあなたのコードの長さに関連して直接的に変動する。参考までにスコアは使われた文字の数に基づく。
+   200文字が最大許容範囲でそれは0点である。200文字より1文字少ない度に1ポイント獲得する。
+   例えば150文字の長さのコードの場合、50ポイント獲得する。
+   このミッションは空白文字はカウントするが、インデントはカウントしない。
+    <!-- We have one more rule for this challenge. This is a code golf mission and your main goal is to make your code as
+    short as possible. The shorter your code, the more points you earn. Your score for this mission is dynamic and
+    directly related to the length of your code. For reference, scoring is based on the number of characters used. 200
+    characters is the maximum allowable and it will earn you zero points. For each character less than 220, you earn 1
+    point. For example for 150 character long code earns you 50 points. In this mission we count whitespaces, but don't
+    count indents. -->
+</p>
+
+<p>
+    <strong>入力: </strong> 整数の数字
+    <!-- A number as an integer. -->
+</p>
+
+<p>
+    <strong>出力: </strong> それが通常の船かそうでないかをブール代数で表す
+    <!-- Is it a normal ship or not as a boolean. -->
+</p>
+
+
+<div class="for_info_only">
+    <p>
+        <strong>例:</strong>
+    </p>
+    <pre class="brush: python">
+recognize(21) == True
+recognize(1587) == True
+recognize(3687) == False
+    </pre>
+</div>
+
+<p class="for_info_only">
+    <strong>どのように使われるか: </strong>
+    これはテキストと離散信号の単純なパターン認識の例です。
+    <!-- This is an example of the simple pattern recognition in text, and discrete signals. -->
+</p>
+
+<p>
+    <strong>事前条件:</strong><br>
+    21 &le; number &le; 1057222719<br>
+    それぞれのテストは3つの信号しかない。
+    <!-- There are three signal only in each test. -->
+</p>
