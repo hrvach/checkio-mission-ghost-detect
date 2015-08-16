@@ -88,5 +88,25 @@ TESTS = {
             "answer": False,
             "explanation": "110000100011111"
         },
+        {
+            "input": 13059,
+            "answer": True,
+            "explanation": "11001100000011"
+        },
+        {
+            "input": 786627,
+            "answer": True,
+            "explanation": "11000000000011000011"
+        },
+        {
+            "input": 221187,
+            "answer": True,
+            "explanation": "110110000000000011"
+        },
+        {
+            "input": 126812175,
+            "answer": True,
+            "explanation": "111100011110000000000001111"
+        },
     ],
 }
